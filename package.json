@@ -1,0 +1,14 @@
+{
+  "name": "automaton-js",
+  "version": "0.0.0",
+  "description": "",
+  "main": "build/test/index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "tsc && node build/test/index.js"
+  },
+  "author": "",
+  "license": "ISC"
+}
