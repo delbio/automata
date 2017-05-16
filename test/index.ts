@@ -28,12 +28,14 @@ try{ s.addAction(a); } catch (e) {
 const automaton = new Automaton();
 automaton.addState(s);
 automaton.setBegin(s);
-automaton.addEnd(s);
+//automaton.addEnd(s);
 
 // stampa mappa degli stati con transizioni
-automaton.printInfo();
+console.log(automaton.toString());
 
 // controllo di integrità dell'automa
-automaton.checkIntegrity();
+try{ automaton.checkIntegrity(); } catch (e) {
+    console.log('checkIntegrity: ', e);
+}
 
 

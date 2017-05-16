@@ -66,7 +66,7 @@ export class Automaton implements AutomatonInterface
         if (this.isNullOrUndefined(begin)){
             throw new InvalidArgumentException('invalid argument, begin must be passed');
         }
-        if (this.begin !== null) {
+        if (!this.isNullOrUndefined(this.begin)) {
             throw new Error('begin state already defined');
         }
         if (!this.statesContain(begin)){
@@ -178,8 +178,29 @@ export class Automaton implements AutomatonInterface
         if (el.length === 0){
             throw new Error('automaton has no end state');
         }
+        el.forEach( e => {
+            if (e.getNextActions().length > 0 && e !== b){
+                throw new Error('end state ' + e + ' must be a dead-end (must not have aoutgoing actions)');
+            }
+        });
+        this.getStates().forEach( e => {
+            if ( e.getNextActions().length === 0 && !this.endContain(e) ){
+                throw new Error('state ' + e + ' is dead-end (has no outgoing actions)');
+            }
+        });
+    }
 
-        // TODO
-        throw new Error('Incomplete Method yet');
+    public toString(): string
+    {
+        let result = this.getName() + ': state->actions mapping ';
+        result += '{ ';
+        this.getStates().forEach( s => {
+            s.getNextActions().forEach( (a,i,l) => {
+                result += s + '.' + a;
+                if ( i < l.length -1 ){ result += ','; }
+            });
+        });
+        result += ' }';
+        return result;
     }
 }
