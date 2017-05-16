@@ -1,5 +1,6 @@
 import { ActionInterface } from './action.interface';
 import { StateInterface } from './state.interface';
+import { isNullOrUndefined } from './value.utils';
 
 export class Action implements ActionInterface
 {
@@ -9,8 +10,8 @@ export class Action implements ActionInterface
     constructor(originState: StateInterface, targetState?: StateInterface)
     {
         this.originState = originState;
-        this.targetState = targetState === null ? originState : targetState;
-        if (originState === null){
+        this.targetState = isNullOrUndefined(targetState) ? originState : targetState;
+        if (isNullOrUndefined(originState)) {
             throw new Error(this+' must have originState set');
         }
     }

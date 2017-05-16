@@ -1,9 +1,7 @@
 import { StateInterface } from './state.interface';
 import { AutomatonInterface } from './automaton.interface';
-
-type GenericMap<T> = { [name : string] : T };
-
-export class InvalidArgumentException extends Error {}
+import { InvalidArgumentException } from './exceptions';
+import { GenericMap, isNullOrUndefined, isString } from './value.utils';
 
 export class Automaton implements AutomatonInterface
 {
@@ -20,17 +18,7 @@ export class Automaton implements AutomatonInterface
     }
     private statesContain(state: StateInterface): boolean
     {
-        const vals = Object.keys(this.states).map(key => this.states[key]);
-        return vals.indexOf(state) > -1;
-    }
-
-    private isString(val: any): boolean
-    {
-        return typeof val === 'string' || val instanceof String;
-    }
-    private isNullOrUndefined(val: any): boolean
-    {
-        return typeof val === "undefined" || val === null;
+        return this.getStates().indexOf(state) > -1;
     }
 
     public addState(state: StateInterface): void
@@ -55,10 +43,10 @@ export class Automaton implements AutomatonInterface
 
     public setBegin(begin: StateInterface): void
     {
-        if (this.isNullOrUndefined(begin)){
+        if (isNullOrUndefined(begin)){
             throw new InvalidArgumentException('invalid argument, begin must be passed');
         }
-        if (!this.isNullOrUndefined(this.begin)) {
+        if (!isNullOrUndefined(this.begin)) {
             throw new Error('begin state already defined');
         }
         if (!this.statesContain(begin)){
@@ -69,7 +57,7 @@ export class Automaton implements AutomatonInterface
 
     public addEnd(end: StateInterface): void
     {
-        if (this.isNullOrUndefined(end)){
+        if (isNullOrUndefined(end)){
             throw new InvalidArgumentException('invalid argument, end must be passed');
         }
         if (!this.statesContain(end)){
@@ -87,10 +75,10 @@ export class Automaton implements AutomatonInterface
 
     public getState(name: string): StateInterface
     {
-        if (this.isNullOrUndefined(name)){
+        if (isNullOrUndefined(name)){
             throw new InvalidArgumentException('invalid argument, name must be passed');
         }
-        if (!this.isString(name)){
+        if (!isString(name)){
             throw new InvalidArgumentException('name must be a string');
         }
         return this.states[name];
@@ -100,14 +88,14 @@ export class Automaton implements AutomatonInterface
 
     public move(actionName: string): void
     {
-        if (this.isNullOrUndefined(actionName)){
+        if (isNullOrUndefined(actionName)){
             throw new InvalidArgumentException('invalid argument, actionName must be passed');
         }
-        if (!this.isString(actionName)){
+        if (!isString(actionName)){
             throw new InvalidArgumentException('actionName must be a string');
         }
         let s = this.getCurrentState();
-        if (this.isNullOrUndefined(s)){
+        if (isNullOrUndefined(s)){
             throw new Error('current state not selected in the automaton');
         }
         const a = s.getAction(actionName);
@@ -117,14 +105,14 @@ export class Automaton implements AutomatonInterface
 
     public doAction(actionName: string, parms: any): any
     {
-        if (this.isNullOrUndefined(actionName)){
+        if (isNullOrUndefined(actionName)){
             throw new InvalidArgumentException('invalid argument, actionName must be passed');
         }
-        if (!this.isString(actionName)){
+        if (!isString(actionName)){
             throw new InvalidArgumentException('actionName must be a string');
         }
         let s = this.getCurrentState();
-        if (this.isNullOrUndefined(s)){
+        if (isNullOrUndefined(s)){
             throw new Error('current state not selected in the automaton');
         }
         const a = s.getAction(actionName);
@@ -136,10 +124,10 @@ export class Automaton implements AutomatonInterface
         if (this.end.length === 0){
             throw new Error('icomplete automaton: end state(s) not defined');
         }
-        if (this.isNullOrUndefined(this.begin)){
+        if (isNullOrUndefined(this.begin)){
             throw new Error('incomplete automaton: begin state not defined');
         }
-        if (this.isNullOrUndefined(state)){
+        if (isNullOrUndefined(state)){
             throw new InvalidArgumentException('automaton state cannot be null or undefined');
         }
         this.state = state;
@@ -147,10 +135,10 @@ export class Automaton implements AutomatonInterface
 
     public setCurrentStateByName(stateName: string): void
     {
-        if (this.isNullOrUndefined(stateName)){
+        if (isNullOrUndefined(stateName)){
             throw new InvalidArgumentException('invalid argument, stateName must be passed');
         }
-        if (!this.isString(stateName)){
+        if (!isString(stateName)){
             throw new InvalidArgumentException('stateName must be a string');
         }
         this.setCurrentState(
@@ -160,7 +148,7 @@ export class Automaton implements AutomatonInterface
 
     public checkIntegrity(): void {
         const b = this.getBegin();
-        if (this.isNullOrUndefined(b)){
+        if (isNullOrUndefined(b)){
             throw new Error('automaton has not initial state');
         }
         const el = this.getEnd();
