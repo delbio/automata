@@ -1,7 +1,7 @@
 import { StateInterface } from './state.interface';
 import { ActionInterface } from './action.interface';
 
-export type GenericMap<T> = { [name : string] : T };
+type GenericMap<T> = { [name : string] : T };
 
 export class UnsupportedOperationException extends Error {}
 
