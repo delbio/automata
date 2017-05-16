@@ -28,10 +28,10 @@ try{ s.addAction(a); } catch (e) {
 const automaton = new Automaton();
 automaton.addState(s);
 automaton.setBegin(s);
-//automaton.addEnd(s);
+automaton.addEnd(s);
 
 // stampa mappa degli stati con transizioni
-console.log(automaton.toString());
+console.log(automaton,automaton.toString());
 
 // controllo di integrità dell'automa
 try{ automaton.checkIntegrity(); } catch (e) {

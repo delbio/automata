@@ -16,20 +16,12 @@ export class Automaton implements AutomatonInterface
 
     private endContain(state: StateInterface): boolean
     {
-        if (this.end.length === 0) { return false }
-        for(let i = 0; i < this.end.length; i++){
-            if (this.end[i] === state) { return true; }
-        }
-        return false;
+        return this.end.indexOf(state) > -1;
     }
     private statesContain(state: StateInterface): boolean
     {
-        const keys = Object.keys(this.states);
-        if (keys.length === 0) { return false }
-        for(const key in keys){
-            if (this.states[key] === state) { return true; }
-        }
-        return false;
+        const vals = Object.keys(this.states).map(key => this.states[key]);
+        return vals.indexOf(state) > -1;
     }
 
     private isString(val: any): boolean
@@ -80,7 +72,7 @@ export class Automaton implements AutomatonInterface
         if (this.isNullOrUndefined(end)){
             throw new InvalidArgumentException('invalid argument, end must be passed');
         }
-        if (!this.endContain(end)){
+        if (!this.statesContain(end)){
             throw new Error('end state not declared in the automaton');
         }
         this.end.push(end);
