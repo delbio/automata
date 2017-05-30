@@ -3,12 +3,17 @@
   "version": "0.0.0",
   "description": "",
   "main": "build/test/index.js",
-  "directories": {
-    "test": "test"
-  },
   "scripts": {
-    "test": "tsc && node build/test/index.js"
+    "test": "rm -rfv build && tsc && ava"
   },
-  "author": "",
-  "license": "ISC"
+  "author": "Fabio Del Bene <delbio87@gmail.com>",
+  "license": "ISC",
+  "ava": {
+    "files": [
+      "**/*.ava.spec.{js,ts}"
+    ]
+  },
+  "devDependencies": {
+    "ava": "^0.19.1"
+  }
 }
