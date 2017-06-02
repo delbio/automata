@@ -7,8 +7,25 @@
     "test": "test"
   },
   "scripts": {
-    "test": "tsc && node build/test/index.js"
+    "test": "jest"
   },
-  "author": "",
-  "license": "ISC"
+  "author": "Fabio Del Bene <delbio87@gmail.com>",
+  "license": "ISC",
+  "jest": {
+    "transform": {
+      "^.+\\.tsx?$": "<rootDir>/node_modules/ts-jest/preprocessor.js"
+    },
+    "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(ts|tsx|js)$",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "json"
+    ]
+  },
+  "devDependencies": {
+    "@types/jest": "^19.2.4",
+    "jest": "^20.0.4",
+    "ts-jest": "^20.0.5"
+  }
 }
