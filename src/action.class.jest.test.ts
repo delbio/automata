@@ -5,12 +5,13 @@ describe('Action', () => {
         const provider = [ null, undefined ];
         provider.forEach(v => {
             expect( () => { new Action(v); } )
+                .toThrow(Error);
+            expect( () => { new Action(v); } )
                 .toThrow('Action() -> '+v+' must have originState set');
+            
         });
     });
     it('constructor_nullOrEmptyTargetStateArgument_targetStateEqualOriginState', () => {
-    //t.fail(); 
+    
     });
 });
-
-
