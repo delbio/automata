@@ -1,13 +1,16 @@
 import { State } from './state.class';
 import { Action } from './action.class';
+import { UnsupportedOperationException } from './exceptions';
 
 class State1 extends State {}
 class Action1 extends Action {}
 
 describe('State', () => {
     it('toString', () => {
-        const state = new State();
-        expect(state.toString()).toBe('State[class=State]');
+        const s = new State();
+        expect(s.toString()).toBe('State[class=State]');
+        const s1 = new State1();
+        expect(s1.toString()).toBe('State1[class=State1]');
     });
     it('getName_return-class-name', () => {
         const state = new State();
@@ -53,5 +56,40 @@ describe('State', () => {
         state.addAction(a2);
         expect(state.getNextInputs()).toEqual(['Action', 'Action1']);
         expect(state.getNextActions()).toEqual([a1, a2]);
+    });
+    it('getAction_with-not-valid-string_thowUnsupportedOperationException', () => {
+        const s = new State();
+        const providers = [undefined, null];
+        providers.forEach((actionName) => {
+            expect(() =>{ s.getAction(actionName); }).toThrow(Error);
+            //expect(() =>{ s.getAction(actionName); }).toThrow(UnsupportedOperationException);
+            expect(() =>{ s.getAction(actionName); })
+                .toThrow('Invalid action '+actionName+' in state State[class=State]');
+        });
+        
+    });
+    it('getAction_state-has-no-actions_thowUnsupportedOperationException', () => {
+        const state = new State();
+        const actionName = 'any';
+        expect(() =>{ state.getAction(actionName); }).toThrow(Error);
+        //expect(() =>{ state.getAction(actionName); }).toThrow(UnsupportedOperationException);
+        expect(() =>{ state.getAction(actionName); }).toThrow('Invalid action '+actionName+' in state State[class=State]');
+    });
+    it('getAction_state-has-one-actions--get-not-found-action_thowUnsupportedOperationException', () => {
+        const state = new State();
+        const a = new Action(state);
+        state.addAction(a);
+        const actionName = 'Action1';
+        expect(() =>{ state.getAction(actionName); }).toThrow(Error);
+        //expect(() =>{ state.getAction(actionName); }).toThrow(UnsupportedOperationException);
+        expect(() =>{ state.getAction(actionName); }).toThrow('Invalid action '+actionName+' in state State[class=State]');
+    });
+    it('getAction_state-with-two-action--get-all-action-by-name_return-correct-actions', () => {
+        const s = new State();
+        const a = new Action(s);
+        const a1 = new Action1(s);
+        s.addAction(a); s.addAction(a1);
+        expect(s.getAction(a.getName())).toBe(a);
+        expect(s.getAction(a1.getName())).toBe(a1);
     });
 });
