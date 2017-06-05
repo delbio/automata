@@ -13,7 +13,7 @@ describe('State', () => {
         const state = new State();
         expect(state.getName()).toBe('State');
         const state1 = new State1();
-        expect(state.getName()).toBe('State1');
+        expect(state1.getName()).toBe('State1');
     });
     it('constructor_empty_nextActions', () => {
         const state = new State();
