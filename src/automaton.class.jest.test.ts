@@ -1,6 +1,7 @@
 import { Action } from './action.class';
 import { State } from './state.class';
 import { Automaton } from './automaton.class';
+import { InvalidArgumentException } from './exceptions';
 
 class Action1 extends Action {}
 class State1 extends State {}
@@ -75,5 +76,35 @@ describe('Automaton', () => {
             expect(automaton.getStates().length).toBe(3);
         }
         expect(automaton.getStates().length).toBe(3);
+    });
+    it('getState_null-or-undefined-parameter_throwError', () => {
+        const automaton = new Automaton();
+        const provider = [null, undefined];
+        provider.forEach((v) => {
+            expect(() => { automaton.getState(v) }).toThrow(Error);
+            //expect(() => { automaton.getState(v) }).toThrow(InvalidArgumentException);
+            expect(() => { automaton.getState(v) }).toThrow('invalid argument, name must be passed');
+        });
+    });
+    it('getState_state-name-not-added_return-undefined', () => {
+        const automaton = new Automaton();
+        const s1 = new State1();
+        automaton.addState(s1);
+        const provider = ['',(new State().getName()), 'zio-pino'];
+        provider.forEach((v) => {
+            expect(automaton.getState(v)).toBeUndefined();
+        });
+    });
+    it('getState_three-state-added_return-correctly', () => {
+        const automaton = new Automaton();
+        const s1 = new State1();
+        const s2 = new State2();
+        const s = new State();
+        automaton.addState(s1);
+        automaton.addState(s2);
+        automaton.addState(s);
+        expect(automaton.getState(s.getName())).toBe(s);
+        expect(automaton.getState(s2.getName())).toBe(s2);
+        expect(automaton.getState(s1.getName())).toBe(s1);
     });
 });
