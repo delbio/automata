@@ -177,7 +177,6 @@ describe('Automaton', () => {
             expect(() => {automaton.addEnd(s)}).toThrow('end state already added');
         }
     });
-    
     it('addEnd_add-multiple-different-state_return-all-added-states', () => {
         const automaton = new Automaton();
         const states = [new State(), new State1(), new State2()];
@@ -185,7 +184,28 @@ describe('Automaton', () => {
             automaton.addState(v);
             automaton.addEnd(v);
         });
-        expect(automaton.getEnd()).toContain(states);
+        const returnedEndStates = automaton.getEnd();
+        expect(returnedEndStates.length).toBe(states.length);
+        states.forEach((v) => {
+            expect(returnedEndStates).toContain(v);
+        });
+    });
+    it('addEnd _ sobstitute state after added that state into end states _ what happen to end state', () => {
+        const automaton = new Automaton();
+        const states = [new State(), new State1(), new State2(), new State()];
+        states.forEach((v) => {
+            automaton.addState(v);
+            automaton.addEnd(v);
+        });
+        automaton.setBegin(states[3]);
+        const returnedEndStates = automaton.getEnd();
+        console.log('ends',returnedEndStates, 'states',automaton.getStates());
+        expect(returnedEndStates.length).toBe(states.length);
+        states.forEach((v) => {
+            expect(returnedEndStates).toContain(v);
+        });
+        automaton.checkIntegrity();
+        //fail();
     });
     
     
