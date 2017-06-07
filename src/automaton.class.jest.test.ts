@@ -107,4 +107,86 @@ describe('Automaton', () => {
         expect(automaton.getState(s2.getName())).toBe(s2);
         expect(automaton.getState(s1.getName())).toBe(s1);
     });
+    
+    it('setBegin_null-or-undefined-param_throwError', () => {
+        const automaton = new Automaton();
+        const provider = [null, undefined];
+        provider.forEach((v) => {
+            expect(() => { automaton.setBegin(v) }).toThrow(Error);
+            //expect(() => { automaton.setBegin(v) }).toThrow(InvalidArgumentException);
+            expect(() => { automaton.setBegin(v) }).toThrow('invalid argument, begin must be passed');
+        });
+    });
+    it('setBegin_set-begin-state-before-add-state-to-states_throwError', () => {
+        const automaton = new Automaton();
+        const s = new State();
+        expect(() => {automaton.setBegin(s)}).toThrow(Error);
+        expect(() => {automaton.setBegin(s)}).toThrow('begin state not declared in the automaton');
+    });
+    it('setBegin_use-state-param_getBegin-return-correct-state', () => {
+        const automaton = new Automaton();
+        const s = new State();
+        automaton.addState(s);
+        automaton.setBegin(s);
+        expect(automaton.getBegin()).toBe(s);
+    });
+    
+    it('setBegin_execute-multiple-time-setBegin_throwError', () => {
+        const automaton = new Automaton();
+        const s = new State();
+        const s1 = new State1();
+        automaton.addState(s);
+        automaton.setBegin(s);
+        expect(automaton.getBegin()).toBe(s);
+        [s, s1].forEach((v) => {
+            expect(() => {automaton.setBegin(v)}).toThrow(Error);
+            expect(() => {automaton.setBegin(v)}).toThrow('begin state already defined');
+        });
+    });
+    it('addEnd_null-or-undefined-param_throwError', () => {
+        const automaton = new Automaton();
+        const provider = [null, undefined];
+        provider.forEach((v) => {
+            expect(() => { automaton.addEnd(v) }).toThrow(Error);
+            //expect(() => { automaton.addEnd(v) }).toThrow(InvalidArgumentException);
+            expect(() => { automaton.addEnd(v) }).toThrow('invalid argument, end must be passed');
+        });
+    });
+    it('addEnd_set-begin-state-before-add-state-to-states_throwError', () => {
+        const automaton = new Automaton();
+        const s = new State();
+        expect(() => {automaton.addEnd(s)}).toThrow(Error);
+        expect(() => {automaton.addEnd(s)}).toThrow('end state not declared in the automaton');
+    });
+    it('addEnd_add-one-state-to-end_return-correct-one-state', () => {
+        const automaton = new Automaton();
+        const s = new State();
+        const s1 = new State1();
+        automaton.addState(s);
+        automaton.addEnd(s);
+        expect(automaton.getEnd().length).toBe(1);
+        expect(automaton.getEnd()[0]).toBe(s);
+    });
+    it('addEnd_add-multiple-time-same-state_throwError', () => {
+        const automaton = new Automaton();
+        const s = new State();
+        automaton.addState(s);
+        automaton.addEnd(s);
+        for (let i = 0; i < 7; i++){
+            expect(() => {automaton.addEnd(s)}).toThrow(Error);
+            expect(() => {automaton.addEnd(s)}).toThrow('end state already added');
+        }
+    });
+    
+    it('addEnd_add-multiple-different-state_return-all-added-states', () => {
+        const automaton = new Automaton();
+        const states = [new State(), new State1(), new State2()];
+        states.forEach((v) => {
+            automaton.addState(v);
+            automaton.addEnd(v);
+        });
+        expect(automaton.getEnd()).toContain(states);
+    });
+    
+    
 });

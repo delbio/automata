@@ -63,6 +63,9 @@ export class Automaton implements AutomatonInterface
         if (!this.statesContain(end)){
             throw new Error('end state not declared in the automaton');
         }
+        if (this.endContain(end)){
+            throw new Error('end state already added');
+        }
         this.end.push(end);
     }
 
