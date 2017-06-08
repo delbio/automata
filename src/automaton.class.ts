@@ -133,6 +133,9 @@ export class Automaton implements AutomatonInterface
         if (isNullOrUndefined(state)){
             throw new InvalidArgumentException('automaton state cannot be null or undefined');
         }
+        if (!this.statesContain(state)){
+            throw new Error('incomplete automaton: state is not defined in the automaton');
+        }
         this.state = state;
     }
 

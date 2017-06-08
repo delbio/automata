@@ -10,30 +10,23 @@ class Automaton1 extends Automaton {}
 
 describe('Automaton', () => {
     it('constructor_empty-automata_empty-states', () => {
-        const automaton = new Automaton();
-        expect(automaton.getStates().length).toBe(0);
+        expect(new Automaton().getStates().length).toBe(0);
     });
     it('constructor_empty-automata_empty-ends', () => {
-        const automaton = new Automaton();
-        expect(automaton.getEnd().length).toBe(0);
+        expect(new Automaton().getEnd().length).toBe(0);
     });
     it('constructor_empty-automata_undefined-begin-state', () => {
-        const automaton = new Automaton();
-        expect(automaton.getBegin()).toBeUndefined();
+        expect(new Automaton().getBegin()).toBeUndefined();
     });
     it('constructor_empty-automata_undefined-current-state', () => {
-        const automaton = new Automaton();
-        expect(automaton.getCurrentState()).toBeUndefined();
+        expect(new Automaton().getCurrentState()).toBeUndefined();
     });
     it('constructor_empty-automata_isfinished-false', () => {
-        const automaton = new Automaton();
-        expect(automaton.isFinished()).toBe(false);
+        expect(new Automaton().isFinished()).toBe(false);
     });
     it('getName_return-class-name', () => {
-        const automaton = new Automaton();
-        expect(automaton.getName()).toBe('Automaton');
-        const automaton1 = new Automaton1();
-        expect(automaton1.getName()).toBe('Automaton1');
+        expect(new Automaton().getName()).toBe('Automaton');
+        expect(new Automaton1().getName()).toBe('Automaton1');
     });
     it('addState_null-or-undefined-param_throwError', () => {
         const automaton = new Automaton();
@@ -45,8 +38,7 @@ describe('Automaton', () => {
     });
     it('addState_empty-automaton_count-one-automata-state', () => {
         const automaton = new Automaton();
-        const s = new State();
-        automaton.addState(s);
+        automaton.addState(new State());
         expect(automaton.getStates().length).toBe(1);
     });
     it('addState_add-same-state-multiple-time_count-one-automata-state', () => {
@@ -190,7 +182,7 @@ describe('Automaton', () => {
             expect(returnedEndStates).toContain(v);
         });
     });
-    it('addEnd _ sobstitute state after added that state into end states _ what happen to end state', () => {
+    it.skip('addEnd _ sobstitute state after added that state into end states _ what happen to end state, manage this condition into checkIntegrity tests', () => {
         const automaton = new Automaton();
         const states = [new State(), new State1(), new State2(), new State()];
         states.forEach((v) => {
@@ -207,6 +199,64 @@ describe('Automaton', () => {
         automaton.checkIntegrity();
         //fail();
     });
-    
-    
+    it('setCurrentState_no-end-states-added_throwError', () => {
+        const automaton = new Automaton();
+        const s = new State();
+        expect(() => { automaton.setCurrentState(s) }).toThrow(Error);
+        expect(() => { automaton.setCurrentState(s) }).toThrow('icomplete automaton: end state(s) not defined');
+    });
+    it('setCurrentState_setted-begin-and-added-ends-null-or-undefined-param_throwError', () => {
+        const automaton = new Automaton();
+        const s = new State();
+        automaton.addState(s);
+        automaton.addEnd(s);
+        automaton.setBegin(s);
+        const provider = [null, undefined];
+        provider.forEach((v) => {
+            expect(() => { automaton.setCurrentState(v) }).toThrow(Error);
+            //expect(() => { automaton.setCurrentState(v) }).toThrow(InvalidArgumentException);
+            expect(() => { automaton.setCurrentState(v) }).toThrow('automaton state cannot be null or undefined');
+        });
+    });
+    it('setCurrentState_set-current-state-with-not-defined-state-in-the-automaton_throwError', () => {
+        const automaton = new Automaton();
+        const s = new State();
+        const s1 = new State1();
+        automaton.addState(s);
+        automaton.addEnd(s);
+        automaton.setBegin(s);
+        expect(() => { automaton.setCurrentState(s1); }).toThrow(Error);
+        expect(() => { automaton.setCurrentState(s1); }).toThrow('incomplete automaton: state is not defined in the automaton');
+    });
+    it('setCurrentState_added-state-setted-begin-added-ends_return-getCurrentState-correctly', () => {
+        const automaton = new Automaton();
+        const s = new State();
+        const s1 = new State1();
+        automaton.addState(s);
+        automaton.addState(s1);
+        automaton.addEnd(s);
+        automaton.setBegin(s);
+        automaton.setCurrentState(s1);
+        expect(automaton.getCurrentState()).toBe(s1);
+    });
+    it('setCurrentStateByName_null-or-undefined-param_throwError', () => {
+        const automaton = new Automaton();
+        const provider = [null, undefined];
+        provider.forEach((v) => {
+            expect(() => { automaton.setCurrentStateByName(v) }).toThrow(Error);
+            //expect(() => { automaton.setCurrentStateByName(v) }).toThrow(InvalidArgumentException);
+            expect(() => { automaton.setCurrentStateByName(v) }).toThrow('invalid argument, stateName must be passed');
+        });
+    });
+    it('setCurrentState_added-state-setted-begin-added-ends_return-getCurrentState-correctly', () => {
+        const automaton = new Automaton();
+        const s = new State();
+        const s1 = new State1();
+        automaton.addState(s);
+        automaton.addState(s1);
+        automaton.addEnd(s);
+        automaton.setBegin(s);
+        automaton.setCurrentStateByName(s1.getName())
+        expect(automaton.getCurrentState()).toBe(s1);
+    });
 });
