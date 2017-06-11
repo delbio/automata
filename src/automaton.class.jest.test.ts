@@ -301,4 +301,7 @@ describe('Automaton', () => {
        automaton.setCurrentState(automaton.getState('State'));
        expect(automaton.doAction(automaton.getState('State').getAction('Action').getName())).toBeNull();
    });
+   it('doAction_pass-param-into-method_action.execute-will-have-same-param-value', () => {
+       fail('not yet implemented, use mock to test action.execute(params). @see: https://facebook.github.io/jest/docs/en/mock-function-api.html#content');
+   });
 });
