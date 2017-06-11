@@ -49,9 +49,8 @@ describe('Action', () => {
     it('execute_any_return-null', () => {
         const s = new State();
         const a = new Action(s);
-        const provider = [null, undefined, [], {'zio': 'pino'}, 12, new State(), 'zio pino'];
         expect(a.execute()).toBeNull();
-        provider.forEach((v) => {
+        [null, undefined, [], {'zio': 'pino'}, 12, new State(), 'zio pino'].forEach((v) => {
             expect(a.execute(v)).toBeNull();
         });
     });

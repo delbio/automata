@@ -280,5 +280,25 @@ describe('Automaton', () => {
             expect(() => { automaton.doAction(v) }).toThrow('invalid argument, actionName must be passed');
         });
     });
-    
+   
+   it('doAction_no-current-state-setted_throwError', () => {
+       const automaton = createAutomatonWithOneStateThatHaveOneAction();
+       const action = automaton.getState('State').getAction('Action');
+       expect( () => { automaton.doAction(action.getName()); }).toThrow(Error);
+       expect( () => { automaton.doAction(action.getName()); }).toThrow('current state not selected in the automaton');
+   });
+   it('doAction_not-supported-action_throwError', () => {
+       const automaton = createAutomatonWithOneStateThatHaveOneAction();
+       automaton.setCurrentState(automaton.getState('State'));
+       const provider = ['zio', 'pino'];
+       provider.forEach((v) => {
+            expect( () => { automaton.doAction(v); }).toThrow(Error);
+            expect( () => { automaton.doAction(v); }).toThrow('Invalid action '+v+' in state State[class=State]');
+       });
+   });
+   it('doAction_without-param_return-null', () => {
+       const automaton = createAutomatonWithOneStateThatHaveOneAction();
+       automaton.setCurrentState(automaton.getState('State'));
+       expect(automaton.doAction(automaton.getState('State').getAction('Action').getName())).toBeNull();
+   });
 });
