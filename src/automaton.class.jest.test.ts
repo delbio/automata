@@ -8,6 +8,17 @@ class State1 extends State {}
 class State2 extends State {}
 class Automaton1 extends Automaton {}
 
+let createAutomatonWithOneStateThatHaveOneAction = () => {
+    const state = new State();
+    const action = new Action(state);
+    state.addAction(action);
+    const automaton = new Automaton();
+    automaton.addState(state);
+    automaton.setBegin(state);
+    automaton.addEnd(state);
+    return automaton;
+};
+
 describe('Automaton', () => {
     it('constructor_empty-automata_empty-states', () => {
         expect(new Automaton().getStates().length).toBe(0);
@@ -259,4 +270,15 @@ describe('Automaton', () => {
         automaton.setCurrentStateByName(s1.getName())
         expect(automaton.getCurrentState()).toBe(s1);
     });
+    
+    it('doAction_null-or-undefined-param_throwError', () => {
+        const automaton = createAutomatonWithOneStateThatHaveOneAction();
+        const provider = [null, undefined];
+        provider.forEach((v) => {
+            expect(() => { automaton.doAction(v) }).toThrow(Error);
+            //expect(() => { automaton.doAction(v) }).toThrow(InvalidArgumentException);
+            expect(() => { automaton.doAction(v) }).toThrow('invalid argument, actionName must be passed');
+        });
+    });
+    
 });

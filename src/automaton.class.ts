@@ -106,7 +106,7 @@ export class Automaton implements AutomatonInterface
         this.setCurrentState(s);
     }
 
-    public doAction(actionName: string, parms: any): any
+    public doAction(actionName: string, parms?: any): any
     {
         if (isNullOrUndefined(actionName)){
             throw new InvalidArgumentException('invalid argument, actionName must be passed');

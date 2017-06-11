@@ -50,6 +50,7 @@ describe('Action', () => {
         const s = new State();
         const a = new Action(s);
         const provider = [null, undefined, [], {'zio': 'pino'}, 12, new State(), 'zio pino'];
+        expect(a.execute()).toBeNull();
         provider.forEach((v) => {
             expect(a.execute(v)).toBeNull();
         });

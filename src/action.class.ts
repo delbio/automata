@@ -20,7 +20,7 @@ export class Action implements ActionInterface
      */
     public getName(): string { return this.constructor['name']; }
 
-    public execute(args: any): any {
+    public execute(args?: any): any {
         //console.log('null action body -- ignoring');
         return null;
     }

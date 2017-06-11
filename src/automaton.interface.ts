@@ -16,7 +16,7 @@ export interface AutomatonInterface
     
     move( actionName: string ): void;
     
-    doAction( actionName: string, parms: any ): any;
+    doAction( actionName: string, parms?: any ): any;
     
     setCurrentState( state: StateInterface ): void;
     
