@@ -318,4 +318,44 @@ describe('Automaton', () => {
        spy.mockReset();
        spy.mockRestore();
    });
+   
+   it('move_null-or-undefined-param_throwError', () => {
+        const automaton = createAutomatonWithOneStateThatHaveOneAction();
+        const provider = [null, undefined];
+        provider.forEach((v) => {
+            expect(() => { automaton.move(v) }).toThrow(Error);
+            //expect(() => { automaton.move(v) }).toThrow(InvalidArgumentException);
+            expect(() => { automaton.move(v) }).toThrow('invalid argument, actionName must be passed');
+        });
+    });
+   
+   it('move_currentState-not-setted_throwError', () => {
+        const automaton = createAutomatonWithOneStateThatHaveOneAction();
+        const actionName = automaton.getState('State').getAction('Action').getName();
+        expect(() => { automaton.move(actionName) }).toThrow(Error);
+        expect(() => { automaton.move(actionName) }).toThrow('current state not selected in the automaton');
+   });
+   
+   
+   it('move_unsupported-action-param_throwError', () => {
+        const automaton = createAutomatonWithOneStateThatHaveOneAction();
+        automaton.setCurrentStateByName('State');
+        const actionName = 'ziopino';
+        expect(() => { automaton.move(actionName) }).toThrow(Error);
+        expect(() => { automaton.move(actionName) }).toThrow('Invalid action ziopino in state State[class=State]');
+   });
+   
+   it('move_use-supported-action-param_move-to-next-state', () => {
+       const automaton = createAutomatonWithOneStateThatHaveOneAction();
+       const s1 = new State1();
+       let s = automaton.getState('State');
+       const a1 = new Action1(s, s1);
+       s.addAction(a1);
+       automaton.addState(s1);
+       automaton.setCurrentStateByName('State');
+       automaton.move(a1.getName());
+       expect(automaton.getCurrentState()).toBe(s1);
+   });
+   
+   
 });
