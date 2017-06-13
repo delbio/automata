@@ -302,6 +302,20 @@ describe('Automaton', () => {
        expect(automaton.doAction(automaton.getState('State').getAction('Action').getName())).toBeNull();
    });
    it('doAction_pass-param-into-method_action.execute-will-have-same-param-value', () => {
-       fail('not yet implemented, use mock to test action.execute(params). @see: https://facebook.github.io/jest/docs/en/mock-function-api.html#content');
+       const automaton = createAutomatonWithOneStateThatHaveOneAction();
+       const s = automaton.getState('State');
+       const a1 = new Action1(s, s);
+       s.addAction(a1);
+       const spy = jest.spyOn(a1, 'execute');
+       automaton.setCurrentState(automaton.getState('State'));
+       const provider = ['ziopino', 1, {'hello': 1, 'world': 2}, null, [], undefined];
+       provider.forEach((v, i) => {
+            const r = automaton.doAction(a1.getName(), v);
+            expect(spy.mock.calls.length).toBe(i+1);
+            expect(spy.mock.calls[i]).toEqual([provider[i]]);
+            expect(r).toBeNull();
+       });
+       spy.mockReset();
+       spy.mockRestore();
    });
 });
