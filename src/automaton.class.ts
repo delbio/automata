@@ -180,11 +180,12 @@ export class Automaton implements AutomatonInterface
     {
         let result = this.getName() + ': state->actions mapping ';
         result += '{ ';
-        this.getStates().forEach( s => {
+        this.getStates().forEach( (s, si, sl) => {
             s.getNextActions().forEach( (a,i,l) => {
                 result += s + '.' + a;
                 if ( i < l.length -1 ){ result += ','; }
             });
+            if ( si < sl.length -1 ){ result += ';'; }
         });
         result += ' }';
         return result;

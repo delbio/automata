@@ -356,6 +356,46 @@ describe('Automaton', () => {
        automaton.move(a1.getName());
        expect(automaton.getCurrentState()).toBe(s1);
    });
-   
-   
+   it('toString_no-nextActions-in-states_return-string', () => {
+       const automaton = new Automaton();
+       expect(automaton.toString()).toBe('Automaton: state->actions mapping {  }');
+       const s = new State();
+       automaton.addState(s);
+       expect(automaton.toString()).toBe('Automaton: state->actions mapping {  }');
+   });
+   it('toString_one-action-and-one-state_return-string', () => {
+       const automaton = new Automaton();
+       const s = new State();
+       const a = new Action(s, s);
+       s.addAction(a);
+       automaton.addState(s);
+       expect(automaton.toString())
+       .toBe('Automaton: state->actions mapping { State[class=State].Action() -> State[class=State] }');
+   });
+   it('toString_multi-action-and-multi-states_return-string', () => {
+        const automaton = new Automaton();
+        const s = new State();
+        const s1 = new State1();        
+
+        s.addAction(new Action(s, s1));
+        s.addAction(new Action1(s, s));
+
+        s1.addAction(new Action1(s1, s));
+        s1.addAction(new Action(s1, s1));
+        
+        automaton.addState(s);
+        automaton.addState(s1);
+        expect(automaton.toString())
+        .toBe('Automaton: state->actions mapping { State[class=State].Action() -> State1[class=State1],State[class=State].Action1() -> State[class=State];State1[class=State1].Action1() -> State[class=State],State1[class=State1].Action() -> State1[class=State1] }');
+   });
+   it('checkIntegrity_correct-settings-return-void', () => {
+       const s = new State();
+       const a = new Action(s, s);
+       s.addAction(a);
+       const automaton = new Automaton();
+       automaton.addState(s);
+       automaton.addEnd(s);
+       automaton.setBegin(s);
+       automaton.checkIntegrity();
+   });
 });
