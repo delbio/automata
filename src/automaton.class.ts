@@ -157,10 +157,10 @@ export class Automaton implements AutomatonInterface
         if (isNullOrUndefined(b)){
             throw new Error('automaton has not initial state');
         }
-        const el = this.getEnd();
         if (b.getNextActions().length === 0 && this.endContain(b)){
             throw new Error('initial state '+b+' is a dead-end (has no outgoing action)');
         }
+        const el = this.getEnd();
         if (el.length === 0){
             throw new Error('automaton has no end state');
         }

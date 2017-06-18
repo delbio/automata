@@ -398,4 +398,19 @@ describe('Automaton', () => {
        automaton.setBegin(s);
        automaton.checkIntegrity();
    });
+   
+   it('checkIntegrity_no-begin-state-setted_throwError', () => {
+       const automaton = new Automaton();
+       expect(() => {automaton.checkIntegrity()}).toThrow(Error);
+       expect(() => {automaton.checkIntegrity()}).toThrow('automaton has not initial state');
+   });
+   it('checkIntegrity_begin-state-no-next-actions-and-endstates-contain-begin_throwError', () => {
+       const automaton = new Automaton();
+       const s = new State();
+       automaton.addState(s);
+       automaton.setBegin(s);
+       automaton.addEnd(s);
+       expect(() => {automaton.checkIntegrity()}).toThrow(Error);
+       expect(() => {automaton.checkIntegrity()}).toThrow('initial state State[class=State] is a dead-end (has no outgoing action)');
+   });
 });
