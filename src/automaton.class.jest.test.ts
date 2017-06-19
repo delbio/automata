@@ -413,4 +413,39 @@ describe('Automaton', () => {
        expect(() => {automaton.checkIntegrity()}).toThrow(Error);
        expect(() => {automaton.checkIntegrity()}).toThrow('initial state State[class=State] is a dead-end (has no outgoing action)');
    });
+   it('checkIntegrity_no-end-state-setted_throwError', () => {
+       const automaton = new Automaton();
+       const s = new State();
+       automaton.addState(s);
+       automaton.setBegin(s);
+       expect(() => {automaton.checkIntegrity()}).toThrow(Error);
+       expect(() => {automaton.checkIntegrity()}).toThrow('automaton has no end state');
+   });
+   
+   it('checkIntegrity_end-states-have-some-nextAction_throwError', () => {
+       const automaton = new Automaton();
+       const s = new State();
+       automaton.addState(s);
+       automaton.setBegin(s);
+       const s1 = new State1();
+       const a = new Action(s1, s);
+       s1.addAction(a);
+       automaton.addState(s1);
+       automaton.addEnd(s1);
+       expect(() => {automaton.checkIntegrity()}).toThrow(Error);
+       expect(() => {automaton.checkIntegrity()}).toThrow('end state State1[class=State1] must be a dead-end (must not have aoutgoing actions)');
+   });
+   
+   it('checkIntegrity_some-declared-state-has-no-outgoing-actions_thorwError', () => {
+       const automaton = new Automaton();
+       const s = new State();
+       automaton.addState(s);
+       automaton.setBegin(s);
+       const s1 = new State1();
+       automaton.addState(s1);
+       automaton.addEnd(s1);
+       expect(() => {automaton.checkIntegrity()}).toThrow(Error);
+       expect(() => {automaton.checkIntegrity()}).toThrow('state State[class=State] is dead-end (has no outgoing actions)');
+   });
+   
 });
