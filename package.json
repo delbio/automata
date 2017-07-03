@@ -1,0 +1,42 @@
+{
+  "name": "automaton-js",
+  "version": "0.0.0",
+  "description": "",
+  "main": "build/test/index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "jest",
+    "build": "rm -rfv build && tsc"
+  },
+  "author": "Fabio Del Bene <delbio87@gmail.com>",
+  "license": "ISC",
+  "jest": {
+    "globals": {
+      "__TS_CONFIG__": {
+        "module": "commonjs"
+      }
+    },
+    "roots": [
+      "<rootDir>/src/"
+    ],
+    "transform": {
+      ".(ts|tsx)": "<rootDir>/node_modules/ts-jest/preprocessor.js"
+    },
+    "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(ts|tsx|js)$",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js"
+    ]
+  },
+  "devDependencies": {
+    "@types/jest": "^19.2.4",
+    "jest": "^20.0.4",
+    "ts-jest": "^20.0.5"
+  },
+  "dependencies": {
+    "typescript": "^2.3.4"
+  }
+}
