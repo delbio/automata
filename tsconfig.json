@@ -4,7 +4,7 @@
         "outDir": "./dist/out-tsc",
         "sourceMap": true,
         "moduleResolution": "node",
-        "target": "es6",
+        "target": "es5",
         "alwaysStrict": true,
         "noImplicitAny": true,
         "noImplicitReturns": true,
@@ -12,5 +12,9 @@
         "typeRoots": [
             "node_modules/@types"
         ]
-    }
+    },
+    "exclude": [
+        "node_modules",
+        "dist"
+    ]
 }

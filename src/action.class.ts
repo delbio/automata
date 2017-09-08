@@ -16,9 +16,7 @@ export class Action implements ActionInterface
         }
     }
 
-    public getName(): string {
-        return getClassName(this);
-    }
+    public getName(): string { return getClassName(this); }
 
     public execute(args?: any): any {
         //console.log('null action body -- ignoring');

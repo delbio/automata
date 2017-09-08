@@ -1,15 +1,15 @@
-var webpack = require('webpack');
-var UglifyJsPlugin = webpack.optimize.UglifyJsPlugin;
+const webpack = require('webpack');
+const UglifyJsPlugin = webpack.optimize.UglifyJsPlugin;
 const CleanWebpackPlugin = require('clean-webpack-plugin');
-var env = process.env.WEBPACK_ENV;
-var path = require('path');
+const env = process.env.WEBPACK_ENV;
+const path = require('path');
 const { CheckerPlugin } = require('awesome-typescript-loader')
 
-var buildFolder = 'build';
+const buildFolder = 'build';
 
-var appName = 'automaton';
+const appName = 'automaton';
 
-var plugins = [
+let plugins = [
     new CheckerPlugin(),
     new CleanWebpackPlugin(buildFolder)
 ], outputFile;
@@ -21,7 +21,7 @@ if (env === 'build') {
   outputFile = appName + '.js';
 }
 
-var config = {
+let config = {
   entry: __dirname + '/src/index.ts',
   devtool: 'source-map',
   output: {
@@ -36,23 +36,12 @@ var config = {
       {
         test: /\.tsx?$/,
         loader: 'awesome-typescript-loader',
-        include: /src/
+        exclude: /node_modules/
       },
     ]
   },
   resolve: {
       extensions: ['.ts', '.tsx', '.js', '.jsx'],
-      "modules": [
-        "./node_modules",
-        "./node_modules"
-      ],
-      "symlinks": true
-  },
-  "resolveLoader": {
-    "modules": [
-      "./node_modules",
-      "./node_modules"
-    ]
   },
   plugins: plugins
 };

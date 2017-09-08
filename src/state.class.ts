@@ -1,6 +1,6 @@
 import { StateInterface } from './state.interface';
 import { ActionInterface } from './action.interface';
-import { GenericMap } from './value.utils';
+import { GenericMap, getClassName } from './value.utils';
 import { UnsupportedOperationException } from './exceptions';
 
 export class State implements StateInterface
@@ -9,10 +9,7 @@ export class State implements StateInterface
 
     constructor() {}
     
-    /**
-     * @see: http://stackoverflow.com/a/36643177/3753724
-     */
-    public getName(): string { return this.constructor['name']; }
+    public getName(): string { return getClassName(this); }
 
     public getNextInputs(): string[] {
         const keys = Object.keys(this.actionMap);
@@ -43,5 +40,5 @@ export class State implements StateInterface
         }
         this.actionMap[action.getName()] = action;
     }
-    public toString(): string { return this.getName() + '[class='+this.constructor['name']+']'; }
+    public toString(): string { return this.getName() + '[class='+getClassName(this)+']'; }
 }
