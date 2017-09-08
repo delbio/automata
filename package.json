@@ -1,40 +1,43 @@
 {
   "name": "automaton-js",
-  "version": "0.0.0",
+  "version": "1.1.0",
   "description": "",
-  "main": "build/test/index.js",
+  "main": "build/automaton.js",
   "directories": {
     "test": "test"
   },
   "scripts": {
     "test": "jest",
-    "build": "rm -rfv build && tsc"
+    "dev": "WEBPACK_ENV=dev webpack --progress --colors --watch",
+    "build": "WEBPACK_ENV=build webpack"
   },
   "author": "Fabio Del Bene <delbio87@gmail.com>",
   "license": "ISC",
   "jest": {
-    "globals": {
-      "__TS_CONFIG__": {
-        "module": "commonjs"
-      }
-    },
     "roots": [
-      "<rootDir>/src/"
+      "<rootDir>/test/"
     ],
     "transform": {
-      ".(ts|tsx)": "<rootDir>/node_modules/ts-jest/preprocessor.js"
+      "^.+\\.tsx?$": "<rootDir>/node_modules/ts-jest/preprocessor.js"
     },
-    "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(ts|tsx|js)$",
+    "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
     "moduleFileExtensions": [
       "ts",
       "tsx",
-      "js"
+      "js",
+      "jsx",
+      "json"
     ]
   },
   "devDependencies": {
-    "@types/jest": "^19.2.4",
-    "jest": "^20.0.4",
-    "ts-jest": "^20.0.5"
+    "@types/node": "^8.0.7",
+    "webpack": "^3.0.0",
+    "@types/webpack": "^3.0.1",
+    "awesome-typescript-loader": "^3.2.1",
+    "clean-webpack-plugin": "^0.1.16",
+    "jest": "^21.0.1",
+    "@types/jest": "^20.0.8",
+    "ts-jest": "^21.0.0"
   },
   "dependencies": {
     "typescript": "^2.3.4"

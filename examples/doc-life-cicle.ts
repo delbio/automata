@@ -39,7 +39,7 @@ automaton.setBegin(nuovo);
 // controllo di integrità dell'automa
 automaton.checkIntegrity();
 
-const doThenMove = (a) => {
+const doThenMove = (a: any) => {
     automaton.doAction(a);
     automaton.move(a);
 };

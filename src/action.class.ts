@@ -1,6 +1,6 @@
 import { ActionInterface } from './action.interface';
 import { StateInterface } from './state.interface';
-import { isNullOrUndefined } from './value.utils';
+import { isNullOrUndefined, getClassName } from './value.utils';
 
 export class Action implements ActionInterface
 {
@@ -15,10 +15,10 @@ export class Action implements ActionInterface
             throw new Error(this+' must have originState set');
         }
     }
-    /**
-     * @see: http://stackoverflow.com/a/36643177/3753724
-     */
-    public getName(): string { return this.constructor['name']; }
+
+    public getName(): string {
+        return getClassName(this);
+    }
 
     public execute(args?: any): any {
         //console.log('null action body -- ignoring');

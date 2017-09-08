@@ -1,9 +1,16 @@
 {
+    "compileOnSave": false,
     "compilerOptions": {
-        "module": "commonjs",
-        "target": "es5",
-        "noImplicitAny": false,
+        "outDir": "./dist/out-tsc",
         "sourceMap": true,
-        "outDir": "build/"
+        "moduleResolution": "node",
+        "target": "es6",
+        "alwaysStrict": true,
+        "noImplicitAny": true,
+        "noImplicitReturns": true,
+        "noImplicitThis": true,
+        "typeRoots": [
+            "node_modules/@types"
+        ]
     }
 }

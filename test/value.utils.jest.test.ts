@@ -1,4 +1,4 @@
-import { isString, isNullOrUndefined } from './value.utils';
+import { isString, isNullOrUndefined } from '../src/value.utils';
 
 describe('isString', () => {
   it('withNoStringArgument_returnFalse', () => {
@@ -13,7 +13,7 @@ describe('isString', () => {
 
 describe('isNullOrUndefined', () => {
     it('withNullArgument_returnTrue', () => {
-        let providers = [ undefined, null ];
+        let providers: any[] = [ undefined, null ];
         providers.forEach( v => { expect(isNullOrUndefined(v)).toBe(true); });
     });
     it('withNotNullArgument_returnFalse', () => {

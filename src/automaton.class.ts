@@ -1,7 +1,7 @@
 import { StateInterface } from './state.interface';
 import { AutomatonInterface } from './automaton.interface';
 import { InvalidArgumentException } from './exceptions';
-import { GenericMap, isNullOrUndefined, isString } from './value.utils';
+import { GenericMap, isNullOrUndefined, isString, getClassName } from './value.utils';
 
 export class Automaton implements AutomatonInterface
 {
