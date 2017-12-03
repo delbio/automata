@@ -6,6 +6,7 @@ const path = require('path');
 const { CheckerPlugin } = require('awesome-typescript-loader')
 
 const buildFolder = 'build';
+const srcFolder = 'src';
 
 const appName = 'automaton';
 
@@ -13,6 +14,7 @@ let plugins = [
     new CheckerPlugin(),
     new CleanWebpackPlugin(buildFolder)
 ], outputFile;
+
 
 if (env === 'build') {
   plugins.push(new UglifyJsPlugin({ minimize: true }));
@@ -22,7 +24,7 @@ if (env === 'build') {
 }
 
 let config = {
-  entry: __dirname + '/src/index.ts',
+  entry: __dirname + '/'+srcFolder+'/index.ts',
   devtool: 'source-map',
   output: {
     path: path.resolve(__dirname, buildFolder),
@@ -36,7 +38,13 @@ let config = {
       {
         test: /\.tsx?$/,
         loader: 'awesome-typescript-loader',
-        exclude: /node_modules/
+        include: [
+          path.resolve(__dirname, srcFolder)
+        ],
+        exclude: [
+          path.resolve(__dirname, 'test'),
+          path.resolve(__dirname, 'node_modules')
+        ]
       },
     ]
   },
