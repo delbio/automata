@@ -1,9 +1,5 @@
-import { Action } from '../src/action.class';
-import { ActionInterface } from '../src/action.interface';
-import { State } from '../src/state.class';
-import { StateInterface } from '../src/state.interface';
-import { AutomatonInterface } from '../src/automaton.interface';
-import { Automaton } from '../src/automaton.class';
+/// <reference types="../../../dist/commonjs" />
+import { Action, State, Automaton } from '../../../dist/commonjs';
 
 // States
 class Nuovo extends State{};
@@ -39,7 +35,7 @@ automaton.setBegin(nuovo);
 // controllo di integrità dell'automa
 automaton.checkIntegrity();
 
-const doThenMove = (a) => {
+const doThenMove = (a: any) => {
     automaton.doAction(a);
     automaton.move(a);
 };

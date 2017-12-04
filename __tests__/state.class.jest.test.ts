@@ -1,6 +1,6 @@
-import { State } from './state.class';
-import { Action } from './action.class';
-import { UnsupportedOperationException } from './exceptions';
+import { State } from '../src/state.class';
+import { Action } from '../src/action.class';
+import { UnsupportedOperationException } from '../src/exceptions';
 
 class State1 extends State {}
 class Action1 extends Action {}
@@ -59,7 +59,7 @@ describe('State', () => {
     });
     it('getAction_with-not-valid-string_thowUnsupportedOperationException', () => {
         const s = new State();
-        const providers = [undefined, null];
+        const providers: any[] = [undefined, null];
         providers.forEach((actionName) => {
             expect(() =>{ s.getAction(actionName); }).toThrow(Error);
             //expect(() =>{ s.getAction(actionName); }).toThrow(UnsupportedOperationException);

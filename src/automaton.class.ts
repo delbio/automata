@@ -1,7 +1,7 @@
 import { StateInterface } from './state.interface';
 import { AutomatonInterface } from './automaton.interface';
 import { InvalidArgumentException } from './exceptions';
-import { GenericMap, isNullOrUndefined, isString } from './value.utils';
+import { GenericMap, isNullOrUndefined, isString, getClassName } from './value.utils';
 
 export class Automaton implements AutomatonInterface
 {
@@ -26,10 +26,7 @@ export class Automaton implements AutomatonInterface
         this.states[state.getName()] = state;
     }
 
-    /**
-     * @see: http://stackoverflow.com/a/36643177/3753724
-     */
-    public getName(): string { return this.constructor['name']; }
+    public getName(): string { return getClassName(this); }
     /**
      * @see: http://stackoverflow.com/a/16643074/3753724 
      */
