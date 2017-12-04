@@ -1,12 +1,23 @@
 {
-  "name": "automaton-js",
+  "name": "@delbio/automata",
   "version": "1.1.1",
-  "description": "",
+  "description": "@delbio/automata is a finite-state-machine (FSM) engine for Node.js and the browser",
+  "author": "Fabio Del Bene <delbio87@gmail.com>",
+  "homepage": "https://bitbucket.org/delbiolabs/automaton-js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://delbio@bitbucket.org/delbiolabs/automaton-js.git"
+  },
+  "bugs": {
+    "url": "https://bitbucket.org/delbiolabs/automaton-js/issues",
+    "email": "delbio87@gmail.com"
+  },
   "main": "./dist/esm/index.js",
   "types": "./dist/esm/types/index.d.ts",
   "directories": {
     "test": "test"
   },
+  "license": "MIT",
   "scripts": {
     "build:es5": "tsc -m commonjs --outDir ./dist/commonjs",
     "build:esm": "tsc -m es6 --outDir ./dist/esm",
@@ -18,14 +29,9 @@
     "coverage": "npm test -- --coverage --no-cache",
     "coverage:watch": "npm run coverage -- --watch",
     "prepare": "npm run build && npm test",
-    "release": "standard-version"
+    "release": "standard-version",
+    "prepublishOnly": "npm run prepare"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://bitbucket.org/delbiolabs/automaton-js.git"
-  },
-  "author": "Fabio Del Bene <delbio87@gmail.com>",
-  "license": "ISC",
   "devDependencies": {
     "@types/jest": "^21.1.8",
     "@types/node": "^8.0.54",
@@ -37,7 +43,7 @@
     "standard-version": "^4.2.0",
     "ts-jest": "^21.2.4",
     "typescript": "^2.6.2",
-    "webpack": "^3.9.1",
+    "webpack": "^3.10.0",
     "webpack-node-externals": "^1.6.0"
   },
   "dependencies": {},
