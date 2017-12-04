@@ -1,7 +1,7 @@
-import { Action } from './action.class';
-import { State } from './state.class';
-import { Automaton } from './automaton.class';
-import { InvalidArgumentException } from './exceptions';
+import { Action } from '../src/action.class';
+import { State } from '../src/state.class';
+import { Automaton } from '../src/automaton.class';
+import { InvalidArgumentException } from '../src/exceptions';
 
 class Action1 extends Action {}
 class State1 extends State {}
@@ -41,7 +41,7 @@ describe('Automaton', () => {
     });
     it('addState_null-or-undefined-param_throwError', () => {
         const automaton = new Automaton();
-        const providers = [null, undefined];
+        const providers: any[] = [null, undefined];
         providers.forEach((v) => {
             expect(() => { automaton.addState(v)}).toThrow();
             expect(automaton.getStates().length).toBe(0);
@@ -82,7 +82,7 @@ describe('Automaton', () => {
     });
     it('getState_null-or-undefined-parameter_throwError', () => {
         const automaton = new Automaton();
-        const provider = [null, undefined];
+        const provider: any[] = [null, undefined];
         provider.forEach((v) => {
             expect(() => { automaton.getState(v) }).toThrow(Error);
             //expect(() => { automaton.getState(v) }).toThrow(InvalidArgumentException);
@@ -113,7 +113,7 @@ describe('Automaton', () => {
     
     it('setBegin_null-or-undefined-param_throwError', () => {
         const automaton = new Automaton();
-        const provider = [null, undefined];
+        const provider: any[] = [null, undefined];
         provider.forEach((v) => {
             expect(() => { automaton.setBegin(v) }).toThrow(Error);
             //expect(() => { automaton.setBegin(v) }).toThrow(InvalidArgumentException);
@@ -148,7 +148,7 @@ describe('Automaton', () => {
     });
     it('addEnd_null-or-undefined-param_throwError', () => {
         const automaton = new Automaton();
-        const provider = [null, undefined];
+        const provider: any[] = [null, undefined];
         provider.forEach((v) => {
             expect(() => { automaton.addEnd(v) }).toThrow(Error);
             //expect(() => { automaton.addEnd(v) }).toThrow(InvalidArgumentException);
@@ -222,7 +222,7 @@ describe('Automaton', () => {
         automaton.addState(s);
         automaton.addEnd(s);
         automaton.setBegin(s);
-        const provider = [null, undefined];
+        const provider: any[] = [null, undefined];
         provider.forEach((v) => {
             expect(() => { automaton.setCurrentState(v) }).toThrow(Error);
             //expect(() => { automaton.setCurrentState(v) }).toThrow(InvalidArgumentException);
@@ -252,7 +252,7 @@ describe('Automaton', () => {
     });
     it('setCurrentStateByName_null-or-undefined-param_throwError', () => {
         const automaton = new Automaton();
-        const provider = [null, undefined];
+        const provider: any[] = [null, undefined];
         provider.forEach((v) => {
             expect(() => { automaton.setCurrentStateByName(v) }).toThrow(Error);
             //expect(() => { automaton.setCurrentStateByName(v) }).toThrow(InvalidArgumentException);
@@ -273,7 +273,7 @@ describe('Automaton', () => {
     
     it('doAction_null-or-undefined-param_throwError', () => {
         const automaton = createAutomatonWithOneStateThatHaveOneAction();
-        const provider = [null, undefined];
+        const provider: any[] = [null, undefined];
         provider.forEach((v) => {
             expect(() => { automaton.doAction(v) }).toThrow(Error);
             //expect(() => { automaton.doAction(v) }).toThrow(InvalidArgumentException);
@@ -308,7 +308,7 @@ describe('Automaton', () => {
        s.addAction(a1);
        const spy = jest.spyOn(a1, 'execute');
        automaton.setCurrentState(automaton.getState('State'));
-       const provider = ['ziopino', 1, {'hello': 1, 'world': 2}, null, [], undefined];
+       const provider: any[] = ['ziopino', 1, {'hello': 1, 'world': 2}, null, [], undefined];
        provider.forEach((v, i) => {
             const r = automaton.doAction(a1.getName(), v);
             expect(spy.mock.calls.length).toBe(i+1);
@@ -321,7 +321,7 @@ describe('Automaton', () => {
    
    it('move_null-or-undefined-param_throwError', () => {
         const automaton = createAutomatonWithOneStateThatHaveOneAction();
-        const provider = [null, undefined];
+        const provider: any[] = [null, undefined];
         provider.forEach((v) => {
             expect(() => { automaton.move(v) }).toThrow(Error);
             //expect(() => { automaton.move(v) }).toThrow(InvalidArgumentException);

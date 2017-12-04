@@ -1,9 +1,5 @@
-import { Action } from '../src/action.class';
-import { ActionInterface } from '../src/action.interface';
-import { State } from '../src/state.class';
-import { StateInterface } from '../src/state.interface';
-import { AutomatonInterface } from '../src/automaton.interface';
-import { Automaton } from '../src/automaton.class';
+/// <reference types="../../../dist/commonjs" />
+import { Action, State, Automaton } from '../../../dist/commonjs';
 
 // States
 class Nuovo extends State{};
@@ -36,20 +32,4 @@ let automaton = new Automaton();
 automaton.addEnd(cancellato);
 automaton.setBegin(nuovo);
 
-// controllo di integrità dell'automa
-automaton.checkIntegrity();
-
-const doThenMove = (a) => {
-    automaton.doAction(a);
-    automaton.move(a);
-};
-const curretAutomatonState = () => {
-    console.log('Current: ', automaton.getCurrentState().toString());
-};
-automaton.setCurrentState(nuovo);
-curretAutomatonState();
-['Modifica', 'Pubblica', 'Modifica', 'Modifica', 'Elimina'].forEach((a) => {
-    console.log('exec: ', a);
-    doThenMove(a);
-    curretAutomatonState();
-});
+export default automaton;

@@ -1,12 +1,12 @@
-import { Action } from './action.class';
-import { State } from './state.class';
+import { Action } from '../src/action.class';
+import { State } from '../src/state.class';
 
 class Action1 extends Action {}
 class State1 extends State {}
 
 describe('Action', () => {
     it('constructor_nullOriginState_throwError', () => {
-        const provider = [ null, undefined ];
+        const provider: any[] = [ null, undefined ];
         provider.forEach(v => {
             expect( () => { new Action(v); } )
                 .toThrow(Error);
