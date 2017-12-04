@@ -2,8 +2,8 @@
   "name": "automaton-js",
   "version": "1.1.1",
   "description": "",
-  "main": "dist/esm/index.js",
-  "types": "dist/esm/types/index.d.ts",
+  "main": "./dist/esm/index.js",
+  "types": "./dist/esm/types/index.d.ts",
   "directories": {
     "test": "test"
   },
@@ -62,7 +62,7 @@
     ]
   },
   "standard-version": {
-    "skip": { // bump, changelog, commit, tag @see https://www.npmjs.com/package/standard-version#skipping-lifecycle-steps
+    "skip": {
       "commit": true,
       "tag": true
     }
