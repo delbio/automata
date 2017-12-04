@@ -1,4 +1,5 @@
-import { Action, ActionInterface, State, StateInterface, Automaton, AutomatonInterface } from '../src/';
+/// <reference types="../../../dist/commonjs" />
+import { Action, State, Automaton } from '../../../dist/commonjs';
 
 // States
 class Nuovo extends State{};

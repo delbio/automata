@@ -1,0 +1,26 @@
+{
+    "compileOnSave": false,
+    "compilerOptions": {
+        "outDir": "./dist",
+        "lib": [ "es2015" ],
+        "target": "es5",
+        "declaration": true,
+        "sourceMap": true,
+        "moduleResolution": "node",
+        "alwaysStrict": true,
+        "noImplicitAny": true,
+        "noImplicitReturns": true,
+        "noImplicitThis": true,
+        "noUnusedLocals": true,
+        "typeRoots": [
+            "node_modules/@types"
+        ],
+        "skipLibCheck": true // fix from https://github.com/facebook/jest/issues/4140
+    },
+    "files": [
+        "src/index.ts"
+    ],
+    "exclude": [
+        "node_modules"
+    ]
+}
