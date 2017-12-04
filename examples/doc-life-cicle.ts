@@ -1,9 +1,4 @@
-import { Action } from '../src/action.class';
-import { ActionInterface } from '../src/action.interface';
-import { State } from '../src/state.class';
-import { StateInterface } from '../src/state.interface';
-import { AutomatonInterface } from '../src/automaton.interface';
-import { Automaton } from '../src/automaton.class';
+import { Action, ActionInterface, State, StateInterface, Automaton, AutomatonInterface } from '../src/';
 
 // States
 class Nuovo extends State{};

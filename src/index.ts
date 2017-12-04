@@ -1,12 +1,6 @@
-//import { ActionInterface } from './action.interface';
-import { Action } from './action.class';
-//import { StateInterface } from './state.interface';
-import { State } from './state.class';
-import { Automaton } from './automaton.class';
-//import { AutomatonInterface } from './automaton.interface';
-
-export {
-    Action,
-    State,
-    Automaton
-}
+export { ActionInterface } from './action.interface';
+export { Action } from './action.class';
+export { StateInterface } from './state.interface';
+export { State } from './state.class';
+export { Automaton } from './automaton.class';
+export { AutomatonInterface } from './automaton.interface';
