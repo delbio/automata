@@ -1,6 +1,6 @@
 {
   "name": "automaton-js",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "",
   "main": "dist/esm/index.js",
   "types": "dist/esm/types/index.d.ts",
@@ -23,8 +23,8 @@
     "test:watch": "npm test -- --watch",
     "coverage": "npm test -- --coverage --no-cache",
     "coverage:watch": "npm run coverage -- --watch",
-    "prepare": "npm run build && npm pack",
-    "relese": "standard-version && npm pack"
+    "prepare": "npm run build && npm test",
+    "release": "standard-version && npm pack"
   },
   "repository": {
     "type": "git",
@@ -40,6 +40,7 @@
     "clean-webpack-plugin": "^0.1.17",
     "jest": "^21.2.1",
     "shx": "^0.2.2",
+    "standard-version": "^4.2.0",
     "ts-jest": "^21.2.4",
     "typescript": "^2.6.2",
     "webpack": "^3.9.1",
