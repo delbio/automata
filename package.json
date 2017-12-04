@@ -29,8 +29,7 @@
     "coverage": "npm test -- --coverage --no-cache",
     "coverage:watch": "npm run coverage -- --watch",
     "prepare": "npm run build && npm test",
-    "release": "standard-version",
-    "prepublishOnly": "npm run prepare"
+    "release": "standard-version"
   },
   "devDependencies": {
     "@types/jest": "^21.1.8",
