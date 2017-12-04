@@ -15,7 +15,7 @@ or `yarn`
 
 ## Usage
 
-- use inside node.js [example](exaples/node-cli/)
+- use inside node.js [example](examples/node-cli/)
 - use as umd module [example](examples/umd-html)
 
 
