@@ -1,10 +1,12 @@
 {
     "compileOnSave": false,
     "compilerOptions": {
-        "outDir": "./dist/out-tsc",
+        "outDir": "./dist",
+        "lib": [ "es2015" ],
+        "target": "es5",
+        "declaration": true,
         "sourceMap": true,
         "moduleResolution": "node",
-        "target": "es5",
         "alwaysStrict": true,
         "noImplicitAny": true,
         "noImplicitReturns": true,
@@ -15,12 +17,10 @@
         ],
         "skipLibCheck": true // fix from https://github.com/facebook/jest/issues/4140
     },
-    "include": [
-        "src/**/*"
+    "files": [
+        "src/index.ts"
     ],
     "exclude": [
-        "node_modules",
-        "test",
-        "dist"
+        "node_modules"
     ]
 }
