@@ -15,7 +15,7 @@ or `yarn`
 
 ## Usage
 
-- use inside node.js [example](examples/node-cli/)
-- use as umd module [example](examples/umd-html)
-
+you can see an example into
+- [automata-examples repository](https://github.com/delbio/automata-examples)
+- [jsfiddle](https://jsfiddle.net/delbio/xbujhdLq/)
 
