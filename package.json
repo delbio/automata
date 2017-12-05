@@ -1,6 +1,6 @@
 {
   "name": "@delbio/automata",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "@delbio/automata is a finite-state-machine (FSM) engine for Node.js and the browser",
   "author": "Fabio Del Bene <delbio87@gmail.com>",
   "homepage": "https://github.com/delbio/automata",
