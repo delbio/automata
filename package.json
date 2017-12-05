@@ -1,15 +1,15 @@
 {
   "name": "@delbio/automata",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "@delbio/automata is a finite-state-machine (FSM) engine for Node.js and the browser",
   "author": "Fabio Del Bene <delbio87@gmail.com>",
-  "homepage": "https://bitbucket.org/delbiolabs/automaton-js",
+  "homepage": "https://github.com/delbio/automata",
   "repository": {
     "type": "git",
-    "url": "git+https://delbio@bitbucket.org/delbiolabs/automaton-js.git"
+    "url": "git+https://github.com/delbio/automata.git"
   },
   "bugs": {
-    "url": "https://bitbucket.org/delbiolabs/automaton-js/issues",
+    "url": "https://github.com/delbio/automata/issues",
     "email": "delbio87@gmail.com"
   },
   "main": "./dist/esm/index.js",
@@ -29,8 +29,7 @@
     "coverage": "npm test -- --coverage --no-cache",
     "coverage:watch": "npm run coverage -- --watch",
     "prepare": "npm run build && npm test",
-    "release": "standard-version",
-    "prepublishOnly": "npm run prepare"
+    "release": "standard-version"
   },
   "devDependencies": {
     "@types/jest": "^21.1.8",
