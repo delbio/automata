@@ -13,6 +13,7 @@
     "email": "delbio87@gmail.com"
   },
   "main": "./src/index.js",
+  "type": "module",
   "types": "./types/index.d.ts",
   "license": "MIT"
 }
