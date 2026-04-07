@@ -1,5 +1,4 @@
-import { State } from "../src/state.class.js";
-import { Action } from "../src/action.class.js";
+import { Action, State } from "../src/index.js";
 
 class State1 extends State {
 }

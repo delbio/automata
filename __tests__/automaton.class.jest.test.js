@@ -1,6 +1,6 @@
-import { Action } from "../src/action.class.js";
-import { State } from "../src/state.class.js";
-import { Automaton } from "../src/automaton.class.js";
+import { jest } from "@jest/globals"
+
+import { Action, State, Automaton } from "../src/index.js";
 
 class Action1 extends Action {
 }
