@@ -27,7 +27,7 @@ class State {
   }
   addAction(action) {
     if (!(action.getOriginState() === this)) {
-      throw new Error("L'origine della azione deve essere questo stato");
+      throw new Error("Action's origin must be this state");
     }
     if (action.getName() in this.actionMap) {
       throw new Error("cannot add action " + action.getName() + " to " + this + ": state already has an action with the same name");

@@ -43,7 +43,7 @@ describe("State", () => {
     }).toThrow(Error);
     expect(() => {
       state.addAction(action);
-    }).toThrow("L'origine della azione deve essere questo stato");
+    }).toThrow("Action's origin must be this state");
   });
   it("addAction_state-already-has-action-with-same-name_throwError", () => {
     const state = new State();
